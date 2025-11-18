@@ -1,0 +1,282 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+/* Modern Dashboard Theme */
+:root {
+  --color-primary: #2e3c8b; /* Main green color from requirements */
+  --color-primary-dark: #256946;
+  --color-primary-light: #38a169;
+  --color-secondary: #4f46e5; /* Indigo */
+  --color-accent: #f59e0b; /* Amber */
+  --color-success: #10b981; /* Green */
+  --color-warning: #f59e0b; /* Amber */
+  --color-error: #ef4444; /* Red */
+  --color-background: #f8fafc; /* Slate-50 */
+  --color-surface: #ffffff;
+  --color-text-primary: #1e293b; /* Slate-800 */
+  --color-text-secondary: #64748b; /* Slate-500 */
+  --color-border: #e2e8f0; /* Slate-200 */
+  --color-sidebar: #1e293b; /* Dark sidebar */
+}
+
+* {
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+/* Custom responsive utilities */
+@layer utilities {
+  .responsive-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .responsive-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3;
+  }
+  
+  .mobile-menu {
+    @apply fixed inset-0 bg-white z-50 lg:hidden;
+  }
+
+  .glass-effect {
+    @apply backdrop-blur-sm bg-white/80;
+  }
+}
+
+/* Modern Dashboard Styles */
+@layer utilities {
+  .responsive-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .responsive-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3;
+  }
+  
+  .glass-effect {
+    @apply backdrop-blur-sm bg-white/80;
+  }
+
+  /* Modern buttons */
+  .btn-primary {
+    @apply bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg;
+  }
+  
+  .btn-secondary {
+    @apply bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg;
+  }
+  
+  .btn-danger {
+    @apply bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg;
+  }
+  
+  .btn-outline {
+    @apply border border-gray-300  px-3 py-1 rounded-lg transition-all duration-200;
+  }
+
+  /* Modern form styles */
+  .form-input {
+    @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 text-slate-600;
+  }
+
+  .form-label {
+    @apply block text-sm font-medium text-white mb-1;
+  }
+
+  /* Modern card styles */
+  .card {
+    @apply bg-white text-white rounded-xl shadow-lg p-3 border border-gray-100;
+  }
+
+  .card-header {
+    @apply border-b border-gray-200 pb-3 mb-3;
+  }
+
+  .card-title {
+    @apply text-lg font-semibold text-white;
+  }
+
+  /* Modern table styles */
+  .table-container {
+    @apply bg-white shadow-lg rounded-xl overflow-hidden border border-gray-200;
+  }
+
+  /* Scrollable table container */
+  .table-scrollable {
+    @apply overflow-auto max-h-96; /* Set max height and enable scrolling */
+  }
+
+  /* Responsive table container for mobile */
+  .table-responsive {
+    @apply block w-full overflow-x-auto whitespace-nowrap;
+  }
+
+  /* Fixed header for scrollable tables */
+  .table-fixed-header thead {
+    @apply sticky top-0 bg-gray-50 z-10;
+  }
+
+  .table {
+    @apply min-w-full divide-y divide-gray-200;
+  }
+
+  .table-header {
+    @apply bg-gray-50;
+  }
+
+  .table-header-cell {
+    @apply px-3 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider;
+  }
+
+  .table-body {
+    @apply bg-white divide-y divide-gray-200;
+  }
+
+  .table-row {
+    @apply  transition-colors duration-200;
+  }
+
+  .table-cell {
+    @apply px-3 py-3 whitespace-nowrap text-sm text-gray-900;
+  }
+
+  /* Modern stats cards */
+  .stats-card {
+    @apply bg-gradient-to-br from-green-50 to-emerald-100 p-3 rounded-xl shadow-md text-center border border-green-200;
+  }
+
+  .stats-value {
+    @apply text-2xl font-bold text-green-700;
+  }
+
+  .stats-label {
+    @apply text-xs text-green-600 mt-1 font-medium;
+  }
+
+  /* Loading states */
+  .loading-spinner {
+    @apply animate-spin rounded-full h-5 w-5 border-b-2 border-green-600;
+  }
+}
+
+/* Toast notifications customization */
+.Toastify__toast {
+  @apply rounded-lg shadow-lg;
+}
+
+.Toastify__toast--success {
+  @apply bg-green-600 text-white;
+}
+
+.Toastify__toast--error {
+  @apply bg-red-600 text-white;
+}
+
+.Toastify__toast--warning {
+  @apply bg-yellow-600 text-white;
+}
+
+.Toastify__toast--info {
+  @apply bg-blue-600 text-white;
+}
+
+/* Custom scrollbar - darker for better visibility */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #e2e8f0;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #64748b;
+  border-radius: 5px;
+  border: 2px solid #e2e8f0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 640px) {
+  .responsive-grid {
+    @apply grid-cols-1 gap-2;
+  }
+  
+  .card {
+    @apply p-2;
+  }
+  
+  .table-cell, .table-header-cell {
+    @apply px-2 py-2;
+  }
+
+  /* Mobile sidebar animation */
+  .mobile-sidebar {
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .mobile-sidebar.open {
+    transform: translateX(0);
+  }
+
+  /* Prevent horizontal scroll when sidebar is open */
+  body.sidebar-open {
+    overflow-x: hidden;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: #0f172a;
+    --color-surface: #1e293b;
+    --color-text-primary: #f1f5f9;
+    --color-text-secondary: #94a3b8;
+    --color-border: #334155;
+  }
+  
+  .card {
+    @apply bg-slate-800 border-slate-700;
+  }
+  
+  .table-container {
+    @apply bg-slate-800 border-slate-700;
+  }
+  
+  .table-header {
+    @apply bg-slate-700;
+  }
+  
+  .table-body {
+    @apply bg-slate-800;
+  }
+  
+  .table-cell {
+    @apply text-slate-200;
+  }
+  
+  .table-header-cell {
+    @apply text-slate-400;
+  }
+  
+  .stats-card {
+    @apply bg-gradient-to-br from-slate-700 to-slate-800 border-slate-600;
+  }
+  
+  .stats-value {
+    @apply text-green-400;
+  }
+  
+  .stats-label {
+    @apply text-green-300;
+  }
+}
