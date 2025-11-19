@@ -488,10 +488,10 @@ const AdminDashboard = () => {
                 {items.map((item, index) => (
                   <div
                     key={index}
-                    className="border rounded-lg p-4 bg-gray-50 space-y-4"
+                    className="border rounded-lg p-4 bg-slate-800 space-y-4"
                   >
                     <div className="flex justify-between items-center mb-3">
-                      <h4 className="font-medium text-gray-700">
+                      <h4 className="font-medium text-white">
                         Barang #{index + 1}
                       </h4>
                       <button
@@ -513,17 +513,17 @@ const AdminDashboard = () => {
                           }
                           className="form-input"
                         >
-                          <option value="">Pilih jenis barang</option>
-                          <option value="Botol/Gelas Plastik Minuman">
+                          <option className="text-slate-600" value="">Pilih jenis barang</option>
+                          <option className="text-slate-600" value="Botol/Gelas Plastik Minuman">
                             Botol/Gelas Plastik Minuman
                           </option>
-                          <option value="Kardus">Kardus</option>
-                          <option value="Buku">Buku</option>
-                          <option value="Logam/Besi">Logam/Besi</option>
-                          <option value="Emberan/Campuran">
+                          <option className="text-slate-600" value="Kardus">Kardus</option>
+                          <option className="text-slate-600" value="Buku">Buku</option>
+                          <option className="text-slate-600" value="Logam/Besi">Logam/Besi</option>
+                          <option className="text-slate-600" value="Emberan/Campuran">
                             Emberan/Campuran
                           </option>
-                          <option value="Elektronik">Elektronik</option>
+                          <option className="text-slate-600" value="Elektronik">Elektronik</option>
                         </select>
                         {!item.item_type && (
                           <p className="text-red-500 text-sm mt-1">
@@ -695,7 +695,7 @@ const AdminDashboard = () => {
                       <div className="flex space-x-2">
                         <button
                           onClick={() => handleEdit(transaction)}
-                          className="btn-outline text-sm text-white bg-blue-600 hover:bg-green-500"
+                          className="btn-outline text-sm text-white bg-blue-600 hover:bg-blue-800"
                         >
                           Edit
                         </button>
@@ -798,7 +798,7 @@ const AdminDashboard = () => {
                                 e.target.value
                               )
                             }
-                            className="form-input text-sm"
+                            className="form-input text-slate-600 text-sm"
                           >
                             <option value="">Pilih jenis barang</option>
                             <option value="Botol/Gelas Plastik Minuman">

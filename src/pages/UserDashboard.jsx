@@ -170,7 +170,7 @@ const UserDashboard = () => {
               placeholder="Cari berdasarkan nama penyetor..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="form-input w-full"
+              className="form-input w-full text-white"
             />
           </div>
         </div>

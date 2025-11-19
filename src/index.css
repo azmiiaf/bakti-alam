@@ -63,28 +63,28 @@
 
   /* Modern buttons */
   .btn-primary {
-    @apply bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg;
+    @apply bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer;
   }
   
   .btn-secondary {
-    @apply bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg;
+    @apply bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer;
   }
   
   .btn-danger {
-    @apply bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg;
+    @apply bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer;
   }
   
   .btn-outline {
-    @apply border border-gray-300  px-3 py-1 rounded-lg transition-all duration-200;
+    @apply border border-gray-300  px-3 py-1 rounded-lg transition-all duration-200 cursor-pointer;
   }
 
   /* Modern form styles */
   .form-input {
-    @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 text-slate-600;
+    @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200;
   }
 
   .form-label {
-    @apply block text-sm font-medium text-white mb-1;
+    @apply block text-sm font-medium mb-1;
   }
 
   /* Modern card styles */

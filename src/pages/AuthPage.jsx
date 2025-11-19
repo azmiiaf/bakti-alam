@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useAuth } from '../components/services/useAuth'
 import { toast } from 'react-toastify'
+import { Link } from 'react-router-dom'
 
 const AuthPage = () => {
   const [email, setEmail] = useState('')
@@ -84,7 +85,8 @@ const AuthPage = () => {
 
           <div className="text-center">
             <p className="text-sm text-gray-600">
-              Untuk admin: gunakan email dengan domain @banksampah.id
+              Kembali Ke Halaman <Link className='text-blue-500' to='/
+              '>Dashboard</Link>
             </p>
           </div>
         </form>
