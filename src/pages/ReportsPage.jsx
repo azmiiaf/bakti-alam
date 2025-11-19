@@ -44,7 +44,7 @@ const ReportsPage = () => {
     if (reportType === "monthly") {
       // Monthly report by item type
       const monthlyData = data.reduce((acc, deposit) => {
-        const date = new Date(deposit.created_at);
+        const date = new Date(deposit.input_date + "T00:00:00Z");
         const monthYear = date.toLocaleDateString("id-ID", {
           month: "long",
           year: "numeric",
@@ -79,7 +79,9 @@ const ReportsPage = () => {
     } else if (reportType === "yearly") {
       // Yearly report by item type
       const yearlyData = data.reduce((acc, deposit) => {
-        const year = new Date(deposit.created_at).getFullYear().toString();
+        const year = new Date(deposit.input_date + "T00:00:00Z")
+          .getFullYear()
+          .toString();
 
         if (!acc[year]) {
           acc[year] = {
@@ -249,26 +251,22 @@ const ReportsPage = () => {
               <thead className="table-header">
                 {reportType === "monthly" ? (
                   <tr>
+                    <th className="table-header-cell">No</th>
                     <th className="table-header-cell">Bulan</th>
                     <th className="table-header-cell">
-                      Botol/Gelas Plastik (kg)
+                      Botol/Gelas Plastik (kg/Rp)
                     </th>
+                    <th className="table-header-cell">Kardus (kg/Rp)</th>
+                    <th className="table-header-cell">Buku (kg/Rp)</th>
+                    <th className="table-header-cell">Logam/Besi (kg/Rp)</th>
                     <th className="table-header-cell">
-                      Botol/Gelas Plastik (Rp)
+                      Emberan/Campuran (kg/Rp)
                     </th>
-                    <th className="table-header-cell">Kardus (kg)</th>
-                    <th className="table-header-cell">Kardus (Rp)</th>
-                    <th className="table-header-cell">Buku (kg)</th>
-                    <th className="table-header-cell">Buku (Rp)</th>
-                    <th className="table-header-cell">Logam/Besi (kg)</th>
-                    <th className="table-header-cell">Logam/Besi (Rp)</th>
-                    <th className="table-header-cell">Emberan/Campuran (kg)</th>
-                    <th className="table-header-cell">Emberan/Campuran (Rp)</th>
-                    <th className="table-header-cell">Elektronik (kg)</th>
-                    <th className="table-header-cell">Elektronik (Rp)</th>
+                    <th className="table-header-cell">Elektronik (kg/Rp)</th>
                   </tr>
                 ) : (
                   <tr>
+                    <th className="table-header-cell">No</th>
                     <th className="table-header-cell">Tahun</th>
                     <th className="table-header-cell">
                       Botol/Gelas Plastik (kg)
@@ -293,7 +291,7 @@ const ReportsPage = () => {
                 {reportData.length === 0 ? (
                   <tr className="table-row">
                     <td
-                      colSpan={13}
+                      colSpan={14}
                       className="table-cell text-center py-8 text-gray-500"
                     >
                       Data tidak ditemukan
@@ -302,56 +300,43 @@ const ReportsPage = () => {
                 ) : (
                   reportData.map((row, index) => (
                     <tr key={index} className="table-row">
+                      <td className="table-cell">{index + 1}</td>
                       {reportType === "monthly" ? (
                         <>
                           <td className="table-cell">{row.month}</td>
                           <td className="table-cell">
                             {(
                               row["Botol/Gelas Plastik Minuman"]?.weight || 0
-                            ).toFixed(2)}
-                          </td>
-                          <td className="table-cell">
-                            Rp{" "}
+                            ).toFixed(2)}{" "}
+                            {"/"} Rp{" "}
                             {(
                               row["Botol/Gelas Plastik Minuman"]?.value || 0
                             ).toLocaleString("id-ID")}
                           </td>
                           <td className="table-cell">
-                            {(row.Kardus?.weight || 0).toFixed(2)}
-                          </td>
-                          <td className="table-cell">
-                            Rp{" "}
+                            {(row.Kardus?.weight || 0).toFixed(2)} {"/"} Rp{" "}
                             {(row.Kardus?.value || 0).toLocaleString("id-ID")}
                           </td>
                           <td className="table-cell">
-                            {(row.Buku?.weight || 0).toFixed(2)}
+                            {(row.Buku?.weight || 0).toFixed(2)} Rp{" "}
+                            {(row.Buku?.value || 0).toLocaleString("id-ID")}
                           </td>
                           <td className="table-cell">
-                            Rp {(row.Buku?.value || 0).toLocaleString("id-ID")}
-                          </td>
-                          <td className="table-cell">
-                            {(row["Logam/Besi"]?.weight || 0).toFixed(2)}
-                          </td>
-                          <td className="table-cell">
+                            {(row["Logam/Besi"]?.weight || 0).toFixed(2)} {"/"}{" "}
                             Rp{" "}
                             {(row["Logam/Besi"]?.value || 0).toLocaleString(
                               "id-ID"
                             )}
                           </td>
                           <td className="table-cell">
-                            {(row["Emberan/Campuran"]?.weight || 0).toFixed(2)}
-                          </td>
-                          <td className="table-cell">
-                            Rp{" "}
+                            {(row["Emberan/Campuran"]?.weight || 0).toFixed(2)}{" "}
+                            {"/"} Rp{" "}
                             {(
                               row["Emberan/Campuran"]?.value || 0
                             ).toLocaleString("id-ID")}
                           </td>
                           <td className="table-cell">
-                            {(row.Elektronik?.weight || 0).toFixed(2)}
-                          </td>
-                          <td className="table-cell">
-                            Rp{" "}
+                            {(row.Elektronik?.weight || 0).toFixed(2)} {"/"} Rp{" "}
                             {(row.Elektronik?.value || 0).toLocaleString(
                               "id-ID"
                             )}

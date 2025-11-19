@@ -7,6 +7,7 @@ CREATE TABLE deposit_transactions (
     depositor_name TEXT NOT NULL,
     total_weight_kg DECIMAL(10,2) NOT NULL,
     total_value DECIMAL(12,2) NOT NULL,
+    input_date DATE NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     admin_id UUID
 );
@@ -40,10 +41,10 @@ CREATE POLICY "Public read access" ON deposit_items
 FOR SELECT USING (true);
 
 -- Sample data
-INSERT INTO deposit_transactions (depositor_name, total_weight_kg, total_value, admin_id) VALUES
-('Ahmad Santoso', 5.50, 11000, NULL),
-('Budi Raharjo', 3.25, 4875, NULL),
-('Citra Dewi', 2.75, 13750, NULL);
+INSERT INTO deposit_transactions (depositor_name, total_weight_kg, total_value, input_date, admin_id) VALUES
+('Ahmad Santoso', 5.50, 11000, '2025-11-19', NULL),
+('Budi Raharjo', 3.25, 4875, '2025-11-19', NULL),
+('Citra Dewi', 2.75, 13750, '2025-11-19', NULL);
 
 INSERT INTO deposit_items (transaction_id, item_type, weight_kg, price_per_kg, total_value) VALUES
 ((SELECT id FROM deposit_transactions WHERE depositor_name = 'Ahmad Santoso' LIMIT 1), 'Elektronik', 5.50, 2000, 11000),

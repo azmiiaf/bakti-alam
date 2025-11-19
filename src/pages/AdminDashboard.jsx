@@ -109,6 +109,11 @@ const AdminDashboard = () => {
         ? new Date(data.created_at).toISOString()
         : new Date().toISOString();
 
+      // Extract date in YYYY-MM-DD format for input_date
+      const inputDate = data.created_at
+        ? data.created_at
+        : new Date().toISOString().split("T")[0];
+
       // Calculate total weight and value
       const totalWeight = items.reduce(
         (sum, item) => sum + parseFloat(item.weight_kg || 0),
@@ -128,7 +133,7 @@ const AdminDashboard = () => {
           depositor_name: data.depositor_name,
           total_weight_kg: totalWeight,
           total_value: totalValue,
-          created_at: createdAt,
+          input_date: inputDate,
           admin_id: user.id,
         })
         .select();
@@ -296,6 +301,11 @@ const AdminDashboard = () => {
         ? new Date(data.created_at).toISOString()
         : selectedDeposit.created_at;
 
+      // Extract date in YYYY-MM-DD format for input_date
+      const inputDate = data.created_at
+        ? data.created_at
+        : new Date(selectedDeposit.input_date).toISOString().split("T")[0];
+
       // Calculate total weight and value
       const totalWeight = editItems.reduce(
         (sum, item) => sum + parseFloat(item.weight_kg || 0),
@@ -315,7 +325,7 @@ const AdminDashboard = () => {
           depositor_name: data.depositor_name,
           total_weight_kg: totalWeight,
           total_value: totalValue,
-          created_at: createdAt,
+          input_date: inputDate,
         })
         .eq("id", editingTransactionId);
 
@@ -364,7 +374,7 @@ const AdminDashboard = () => {
 
     deposits.forEach((transaction) => {
       transaction.deposit_items.forEach((item) => {
-        csvContent += `${new Date(transaction.created_at).toLocaleDateString(
+        csvContent += `${new Date(transaction.input_date).toLocaleDateString(
           "id-ID"
         )},${transaction.depositor_name},${item.item_type},${item.weight_kg},${
           item.price_per_kg
@@ -513,17 +523,33 @@ const AdminDashboard = () => {
                           }
                           className="form-input"
                         >
-                          <option className="text-slate-600" value="">Pilih jenis barang</option>
-                          <option className="text-slate-600" value="Botol/Gelas Plastik Minuman">
+                          <option className="text-slate-600" value="">
+                            Pilih jenis barang
+                          </option>
+                          <option
+                            className="text-slate-600"
+                            value="Botol/Gelas Plastik Minuman"
+                          >
                             Botol/Gelas Plastik Minuman
                           </option>
-                          <option className="text-slate-600" value="Kardus">Kardus</option>
-                          <option className="text-slate-600" value="Buku">Buku</option>
-                          <option className="text-slate-600" value="Logam/Besi">Logam/Besi</option>
-                          <option className="text-slate-600" value="Emberan/Campuran">
+                          <option className="text-slate-600" value="Kardus">
+                            Kardus
+                          </option>
+                          <option className="text-slate-600" value="Buku">
+                            Buku
+                          </option>
+                          <option className="text-slate-600" value="Logam/Besi">
+                            Logam/Besi
+                          </option>
+                          <option
+                            className="text-slate-600"
+                            value="Emberan/Campuran"
+                          >
                             Emberan/Campuran
                           </option>
-                          <option className="text-slate-600" value="Elektronik">Elektronik</option>
+                          <option className="text-slate-600" value="Elektronik">
+                            Elektronik
+                          </option>
                         </select>
                         {!item.item_type && (
                           <p className="text-red-500 text-sm mt-1">
@@ -648,6 +674,7 @@ const AdminDashboard = () => {
           <table className="table table-fixed-header">
             <thead className="table-header">
               <tr>
+                <th className="table-header-cell">No</th>
                 <th className="table-header-cell">Tanggal</th>
                 <th className="table-header-cell">Nama Penyetor</th>
                 <th className="table-header-cell">Jenis Barang</th>
@@ -660,17 +687,18 @@ const AdminDashboard = () => {
               {filteredDeposits.length === 0 ? (
                 <tr className="table-row">
                   <td
-                    colSpan="6"
+                    colSpan="7"
                     className="table-cell text-center py-8 text-gray-500"
                   >
                     Data tidak ditemukan
                   </td>
                 </tr>
               ) : (
-                filteredDeposits.map((transaction) => (
+                filteredDeposits.map((transaction, index) => (
                   <tr key={transaction.id} className="table-row">
+                    <td className="table-cell">{index + 1}</td>
                     <td className="table-cell">
-                      {new Date(transaction.created_at).toLocaleDateString(
+                      {new Date(transaction.input_date).toLocaleDateString(
                         "id-ID"
                       )}
                     </td>

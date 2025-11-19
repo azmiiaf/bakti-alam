@@ -98,16 +98,16 @@ const UserDashboard = () => {
     0
   );
 
-  // Prepare data for monthly trend chart using flatDeposits
-  const monthlyData = flatDeposits.reduce((acc, deposit) => {
-    const depositDate = new Date(deposit.created_at);
+  // Prepare data for monthly deposit value chart using transactions
+  const monthlyData = deposits.reduce((acc, transaction) => {
+    const depositDate = new Date(transaction.input_date + "T00:00:00Z");
     const monthYear = `${
       depositDate.getMonth() + 1
     }/${depositDate.getFullYear()}`;
     if (!acc[monthYear]) {
       acc[monthYear] = 0;
     }
-    acc[monthYear] += deposit.total_value;
+    acc[monthYear] += transaction.total_value;
     return acc;
   }, {});
 
@@ -195,6 +195,7 @@ const UserDashboard = () => {
           <table className="table table-fixed-header">
             <thead className="table-header">
               <tr>
+                <th className="table-header-cell">No</th>
                 <th className="table-header-cell">Nama Penyetor</th>
                 <th className="table-header-cell">Total Transaksi</th>
                 <th className="table-header-cell">Total Nilai</th>
@@ -204,22 +205,25 @@ const UserDashboard = () => {
               {Object.entries(filteredDepositorStats).length === 0 ? (
                 <tr className="table-row">
                   <td
-                    colSpan="3"
+                    colSpan="4"
                     className="table-cell text-center py-8 text-gray-500"
                   >
                     Data tidak ditemukan
                   </td>
                 </tr>
               ) : (
-                Object.entries(filteredDepositorStats).map(([name, stats]) => (
-                  <tr key={name} className="table-row">
-                    <td className="table-cell font-medium">{name}</td>
-                    <td className="table-cell">{stats.totalTransactions}</td>
-                    <td className="table-cell">
-                      Rp {stats.totalValue.toLocaleString("id-ID")}
-                    </td>
-                  </tr>
-                ))
+                Object.entries(filteredDepositorStats).map(
+                  ([name, stats], index) => (
+                    <tr key={name} className="table-row">
+                      <td className="table-cell">{index + 1}</td>
+                      <td className="table-cell font-medium">{name}</td>
+                      <td className="table-cell">{stats.totalTransactions}</td>
+                      <td className="table-cell">
+                        Rp {stats.totalValue.toLocaleString("id-ID")}
+                      </td>
+                    </tr>
+                  )
+                )
               )}
             </tbody>
           </table>
@@ -236,6 +240,7 @@ const UserDashboard = () => {
           <table className="table table-fixed-header">
             <thead className="table-header">
               <tr>
+                <th className="table-header-cell">No</th>
                 <th className="table-header-cell">Tanggal</th>
                 <th className="table-header-cell">Nama Penyetor</th>
                 <th className="table-header-cell">Jenis Barang</th>
@@ -247,17 +252,18 @@ const UserDashboard = () => {
               {deposits.length === 0 ? (
                 <tr className="table-row">
                   <td
-                    colSpan="5"
+                    colSpan="6"
                     className="table-cell text-center py-8 text-gray-500"
                   >
                     Data tidak ditemukan
                   </td>
                 </tr>
               ) : (
-                deposits.slice(0, 10).map((transaction) => (
+                deposits.slice(0, 10).map((transaction, index) => (
                   <tr key={transaction.id} className="table-row">
+                    <td className="table-cell">{index + 1}</td>
                     <td className="table-cell">
-                      {new Date(transaction.created_at).toLocaleDateString(
+                      {new Date(transaction.input_date).toLocaleDateString(
                         "id-ID"
                       )}
                     </td>
@@ -265,8 +271,8 @@ const UserDashboard = () => {
                     <td className="table-cell">
                       <div className="text-sm">
                         {transaction.deposit_items.map((item, idx) => (
-                          <div key={idx} className="mb-1">-
-                            {item.item_type} ({item.weight_kg} kg @ Rp{" "}
+                          <div key={idx} className="mb-1">
+                            -{item.item_type} ({item.weight_kg} kg x Rp{" "}
                             {item.price_per_kg.toLocaleString("id-ID")})
                           </div>
                         ))}
