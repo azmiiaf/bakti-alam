@@ -128,7 +128,7 @@ const UserDashboard = () => {
           {chartData.length > 0 ? (
             <div className="h-44 ">
               {/* Simple bar chart using divs */}
-              <div className="flex items-end justify-between h-full space-x-2">
+              <div className="flex items-end justify-center h-full space-x-2">
                 {chartData.map((data, index) => (
                   <div key={index} className="flex flex-col items-center">
                     <div

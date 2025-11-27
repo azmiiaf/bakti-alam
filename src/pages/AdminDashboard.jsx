@@ -707,7 +707,7 @@ const AdminDashboard = () => {
                       <div className="text-sm">
                         {transaction.deposit_items.map((item, idx) => (
                           <div key={idx} className="mb-1">
-                            -{item.item_type} ({item.weight_kg} kg @ Rp{" "}
+                            -{item.item_type} ({item.weight_kg} kg x Rp{" "}
                             {item.price_per_kg.toLocaleString("id-ID")})
                           </div>
                         ))}
