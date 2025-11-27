@@ -51,9 +51,9 @@ const Sidebar = ({ activePage, onNavigate }) => {
         {/* Logo */}
         <div className="p-6 border-b border-slate-700">
           <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 rounded-lg flex items-center justify-center shrink-0">
+            <div className="w-12 h-12  flex items-center justify-center shrink-0">
               <span className="text-xl">
-                <img src="../../../public/logo.png" alt="Logo" />
+                <img src="/logo.png" className="rounded-4xl " alt="Logo" />
               </span>
             </div>
             <div className="min-w-0 flex-1">

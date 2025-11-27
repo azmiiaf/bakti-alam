@@ -70,9 +70,9 @@ const MobileHeader = ({ activePage, onMenuToggle, isMenuOpen }) => {
           <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0">
             <span className="text-lg">
               <img
-                src="./public/logo.png"
+                src="/logo.png"
                 alt="Logo"
-                className="w-full h-full"
+                className="w-full h-full rounded-4xl"
               />
             </span>
           </div>
