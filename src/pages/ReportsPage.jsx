@@ -17,19 +17,40 @@ const ReportsPage = () => {
     try {
       setLoading(true);
 
-      // Fetch all items (which represent individual deposits)
-      const { data: items, error: itemsError } = await supabase
-        .from("deposit_items")
+      // Fetch transactions
+      const { data: transactions, error: transError } = await supabase
+        .from("deposit_transactions")
         .select("*")
         .order("created_at", { ascending: false });
+
+      if (transError) {
+        console.error("Transactions fetch error:", transError);
+        throw transError;
+      }
+
+      // Fetch all items
+      const { data: items, error: itemsError } = await supabase
+        .from("deposit_items")
+        .select("*");
 
       if (itemsError) {
         console.error("Items fetch error:", itemsError);
         throw itemsError;
       }
 
-      setDeposits(items || []);
-      generateReport(items || []);
+      // Combine items with their transaction data
+      const itemsWithTransactionData = items.map((item) => {
+        const transaction = transactions.find(
+          (t) => t.id === item.transaction_id
+        );
+        return {
+          ...item,
+          input_date: transaction?.input_date || null,
+        };
+      });
+
+      setDeposits(itemsWithTransactionData || []);
+      generateReport(itemsWithTransactionData || []);
     } catch (error) {
       console.error("Failed to fetch deposits:", error);
       toast.error("Gagal mengambil data penyetoran.");
@@ -43,8 +64,10 @@ const ReportsPage = () => {
 
     if (reportType === "monthly") {
       // Monthly report by item type
-      const monthlyData = data.reduce((acc, deposit) => {
-        const date = new Date(deposit.input_date + "T00:00:00Z");
+      const monthlyData = data.reduce((acc, item) => {
+        if (!item.input_date) return acc;
+
+        const date = new Date(item.input_date + "T00:00:00Z");
         const monthYear = date.toLocaleDateString("id-ID", {
           month: "long",
           year: "numeric",
@@ -65,9 +88,9 @@ const ReportsPage = () => {
           };
         }
 
-        if (acc[monthKey][deposit.item_type]) {
-          acc[monthKey][deposit.item_type].weight += deposit.weight_kg;
-          acc[monthKey][deposit.item_type].value += deposit.total_value;
+        if (acc[monthKey][item.item_type]) {
+          acc[monthKey][item.item_type].weight += item.weight_kg;
+          acc[monthKey][item.item_type].value += item.total_value;
         }
 
         return acc;
@@ -78,8 +101,10 @@ const ReportsPage = () => {
         .map(([, data]) => data);
     } else if (reportType === "yearly") {
       // Yearly report by item type
-      const yearlyData = data.reduce((acc, deposit) => {
-        const year = new Date(deposit.input_date + "T00:00:00Z")
+      const yearlyData = data.reduce((acc, item) => {
+        if (!item.input_date) return acc;
+
+        const year = new Date(item.input_date + "T00:00:00Z")
           .getFullYear()
           .toString();
 
@@ -94,9 +119,9 @@ const ReportsPage = () => {
           };
         }
 
-        if (acc[year][deposit.item_type]) {
-          acc[year][deposit.item_type].weight += deposit.weight_kg;
-          acc[year][deposit.item_type].value += deposit.total_value;
+        if (acc[year][item.item_type]) {
+          acc[year][item.item_type].weight += item.weight_kg;
+          acc[year][item.item_type].value += item.total_value;
         }
 
         return acc;
