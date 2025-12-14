@@ -244,7 +244,7 @@ const UserDashboard = () => {
                 <th className="table-header-cell">Tanggal</th>
                 <th className="table-header-cell">Nama Penyetor</th>
                 <th className="table-header-cell">Jenis Barang</th>
-                <th className="table-header-cell">Total Berat (kg)</th>
+                <th className="table-header-cell">Total Berat (kg / liter)</th>
                 <th className="table-header-cell">Total Nilai</th>
               </tr>
             </thead>
