@@ -85,6 +85,8 @@ const ReportsPage = () => {
             "Logam/Besi": { weight: 0, value: 0 },
             "Emberan/Campuran": { weight: 0, value: 0 },
             Elektronik: { weight: 0, value: 0 },
+            Oli: { weight: 0, value: 0 },
+            "Minyak Jelantah (Mijel)": { weight: 0, value: 0 },
           };
         }
 
@@ -116,6 +118,8 @@ const ReportsPage = () => {
             "Logam/Besi": { weight: 0, value: 0 },
             "Emberan/Campuran": { weight: 0, value: 0 },
             Elektronik: { weight: 0, value: 0 },
+            Oli: { weight: 0, value: 0 },
+            "Minyak Jelantah (Mijel)": { weight: 0, value: 0 },
           };
         }
 
@@ -148,7 +152,7 @@ const ReportsPage = () => {
 
     if (reportType === "monthly") {
       csvContent =
-        "Bulan,Botol/Gelas Plastik (kg),Botol/Gelas Plastik (Rp),Kardus (kg),Kardus (Rp),Buku (kg),Buku (Rp),Logam/Besi (kg),Logam/Besi (Rp),Emberan/Campuran (kg),Emberan/Campuran (Rp),Elektronik (kg),Elektronik (Rp)\n";
+        "Bulan,Botol/Gelas Plastik (kg),Botol/Gelas Plastik (Rp),Kardus (kg),Kardus (Rp),Buku (kg),Buku (Rp),Logam/Besi (kg),Logam/Besi (Rp),Emberan/Campuran (kg),Emberan/Campuran (Rp),Elektronik (kg),Elektronik (Rp),Oli (kg),Oli (Rp),Minyak Jelantah (kg),Minyak Jelantah (Rp)\n";
       reportData.forEach((row) => {
         csvContent += `${row.month},${
           row["Botol/Gelas Plastik Minuman"]?.weight || 0
@@ -160,11 +164,15 @@ const ReportsPage = () => {
           row["Emberan/Campuran"]?.weight || 0
         },${row["Emberan/Campuran"]?.value || 0},${
           row.Elektronik?.weight || 0
-        },${row.Elektronik?.value || 0}\n`;
+        },${row.Elektronik?.value || 0},${row.Oli?.weight || 0},${
+          row.Oli?.value || 0
+        },${row["Minyak Jelantah (Mijel)"]?.weight || 0},${
+          row["Minyak Jelantah (Mijel)"]?.value || 0
+        }\n`;
       });
     } else if (reportType === "yearly") {
       csvContent =
-        "Tahun,Botol/Gelas Plastik (kg),Botol/Gelas Plastik (Rp),Kardus (kg),Kardus (Rp),Buku (kg),Buku (Rp),Logam/Besi (kg),Logam/Besi (Rp),Emberan/Campuran (kg),Emberan/Campuran (Rp),Elektronik (kg),Elektronik (Rp)\n";
+        "Tahun,Botol/Gelas Plastik (kg),Botol/Gelas Plastik (Rp),Kardus (kg),Kardus (Rp),Buku (kg),Buku (Rp),Logam/Besi (kg),Logam/Besi (Rp),Emberan/Campuran (kg),Emberan/Campuran (Rp),Elektronik (kg),Elektronik (Rp),Oli (kg),Oli (Rp),Minyak Jelantah (kg),Minyak Jelantah (Rp)\n";
       reportData.forEach((row) => {
         csvContent += `${row.year},${
           row["Botol/Gelas Plastik Minuman"]?.weight || 0
@@ -176,7 +184,11 @@ const ReportsPage = () => {
           row["Emberan/Campuran"]?.weight || 0
         },${row["Emberan/Campuran"]?.value || 0},${
           row.Elektronik?.weight || 0
-        },${row.Elektronik?.value || 0}\n`;
+        },${row.Elektronik?.value || 0},${row.Oli?.weight || 0},${
+          row.Oli?.value || 0
+        },${row["Minyak Jelantah (Mijel)"]?.weight || 0},${
+          row["Minyak Jelantah (Mijel)"]?.value || 0
+        }\n`;
       });
     }
 
@@ -288,6 +300,10 @@ const ReportsPage = () => {
                       Emberan/Campuran (kg/Rp)
                     </th>
                     <th className="table-header-cell">Elektronik (kg/Rp)</th>
+                    <th className="table-header-cell">Oli (liter/Rp)</th>
+                    <th className="table-header-cell">
+                      Minyak Jelantah (liter/Rp)
+                    </th>
                   </tr>
                 ) : (
                   <tr>
@@ -309,6 +325,10 @@ const ReportsPage = () => {
                     <th className="table-header-cell">Emberan/Campuran (Rp)</th>
                     <th className="table-header-cell">Elektronik (kg)</th>
                     <th className="table-header-cell">Elektronik (Rp)</th>
+                    <th className="table-header-cell">Oli (kg)</th>
+                    <th className="table-header-cell">Oli (Rp)</th>
+                    <th className="table-header-cell">Minyak Jelantah (kg)</th>
+                    <th className="table-header-cell">Minyak Jelantah (Rp)</th>
                   </tr>
                 )}
               </thead>
@@ -365,6 +385,19 @@ const ReportsPage = () => {
                             {(row.Elektronik?.value || 0).toLocaleString(
                               "id-ID"
                             )}
+                          </td>
+                          <td className="table-cell">
+                            {(row.Oli?.weight || 0).toFixed(2)} {"/"} Rp{" "}
+                            {(row.Oli?.value || 0).toLocaleString("id-ID")}
+                          </td>
+                          <td className="table-cell">
+                            {(
+                              row["Minyak Jelantah (Mijel)"]?.weight || 0
+                            ).toFixed(2)}{" "}
+                            {"/"} Rp{" "}
+                            {(
+                              row["Minyak Jelantah (Mijel)"]?.value || 0
+                            ).toLocaleString("id-ID")}
                           </td>
                         </>
                       ) : (

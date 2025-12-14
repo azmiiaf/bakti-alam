@@ -550,6 +550,15 @@ const AdminDashboard = () => {
                           <option className="text-slate-600" value="Elektronik">
                             Elektronik
                           </option>
+                          <option className="text-slate-600" value="Oli">
+                            Oli
+                          </option>
+                          <option
+                            className="text-slate-600"
+                            value="Minyak Jelantah (Mijel)"
+                          >
+                            Minyak Jelantah (Mijel)
+                          </option>
                         </select>
                         {!item.item_type && (
                           <p className="text-red-500 text-sm mt-1">
@@ -707,7 +716,7 @@ const AdminDashboard = () => {
                       <div className="text-sm">
                         {transaction.deposit_items.map((item, idx) => (
                           <div key={idx} className="mb-1">
-                            -{item.item_type} ({item.weight_kg} kg x Rp{" "}
+                            -{item.item_type} ({item.weight_kg} kg / liter x Rp{" "}
                             {item.price_per_kg.toLocaleString("id-ID")})
                           </div>
                         ))}
@@ -839,6 +848,10 @@ const AdminDashboard = () => {
                               Emberan/Campuran
                             </option>
                             <option value="Elektronik">Elektronik</option>
+                            <option value="Oli">Oli</option>
+                            <option value="Minyak Jelantah (Mijel)">
+                              Minyak Jelantah (Mijel)
+                            </option>
                           </select>
                         </div>
 

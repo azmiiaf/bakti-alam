@@ -15,7 +15,7 @@ CREATE TABLE deposit_transactions (
 CREATE TABLE deposit_items (
     id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
     transaction_id UUID NOT NULL REFERENCES deposit_transactions(id) ON DELETE CASCADE,
-    item_type TEXT NOT NULL CHECK (item_type IN ('Botol/Gelas Plastik Minuman', 'Kardus', 'Buku', 'Logam/Besi', 'Emberan/Campuran', 'Elektronik')),
+    item_type TEXT NOT NULL CHECK (item_type IN ('Botol/Gelas Plastik Minuman', 'Kardus', 'Buku', 'Logam/Besi', 'Emberan/Campuran', 'Elektronik', 'Oli', 'Minyak Jelantah (Mijel)')),
     weight_kg DECIMAL(10,2) NOT NULL,
     price_per_kg DECIMAL(10,2) NOT NULL,
     total_value DECIMAL(12,2) NOT NULL,
